@@ -1,0 +1,24 @@
+@import "shared";
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: $dark-grey;
+  @include flex-row;
+  justify-content: center;
+  .title {
+    margin: 0 auto;
+    color: $white;
+    font-family: $title-font;
+  }
+  .text {
+    font-family: $text-font;
+    font-weight: 400;
+  }
+}
+
+.icon { cursor: pointer; }
