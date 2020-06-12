@@ -1,12 +1,59 @@
-.to-do-item-edit {
-  @include flex-row; 
-  align-items: center;
-  width: 80%;
-  .edit-project {
+@import '../shared';
+
+.container {
+  @include flex-column;
+  width: 100%;
+  padding: 1%;
+  .card-container {
+    @include flex-column;
+    width: 25%;
+    margin: 2% auto;
+    padding: 2% 3%;
     background-color: $light-grey;
-    color: $light-white;
-    border: none;
-    font-size: 1em;
-    width: 50%;
+    border-radius: 10px;
+    .add-container {
+      align-self: center;
+    }
   }
+  .to-do-container {
+    @include flex-column;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    .to-do-item {
+      @include flex-row;
+      color: $light-white;
+      font-weight: 400;
+      font-family: $text-font;
+      span { margin-left: 2em; }
+    }
+    .to-do-item-edit{
+      @include flex-row;
+      align-items: center;
+      width: 100%;
+      .edit-project {
+        background-color: $light-grey;
+        color: $light-white;
+        border: none;
+        font-size: 1em;
+        width: 50%;
+      }
+      input { margin-right: 2em; }
+      .icon { margin: 0 2em; }
+    }
+    .checked {
+      color: $dark-white;
+      p {
+        text-decoration: line-through;
+      }
+    }
+  }
+  .title {
+    text-decoration: underline;
+  }
+  .title-low-priority { text-decoration-color: $low-priority; }
+  .title-medium-priority { text-decoration-color: $medium-priority; }
+  .title-high-priority { text-decoration-color: $high-priority; }
+  .title-uh-priority { text-decoration-color: $ultra-high-priority; }
 }
