@@ -1,0 +1,12 @@
+.to-do-item-edit {
+  @include flex-row; 
+  align-items: center;
+  width: 80%;
+  .edit-project {
+    background-color: $light-grey;
+    color: $light-white;
+    border: none;
+    font-size: 1em;
+    width: 50%;
+  }
+}
