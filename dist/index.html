@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>To-do List</title>
-    <link rel="stylesheet" href="dist/stylesheet.css">
+    <link rel="stylesheet" href="stylesheet.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Spartan&display=swap" rel="stylesheet">
   </head>
   <body>
@@ -47,7 +47,32 @@
       <ul class="projects-container" id="projects-container">
       </ul>
     </div>
-    
-    <script src="dist/bundle.js"></script>
+     <div class="container">
+
+      <h1 class="title title-medium-priority" id="project-title">To-do app</h1>
+      <div class='card-container' id="card-container">
+        <div class="add-container">
+          <svg class="icon" id='add-to-do-icon'><use xlink:href="#add-icon" /></svg>
+        </div>
+        <ul class="to-do-container" id='to-do-container'>
+          <li class="to-do-item-edit invisible" id='to-do-item-edit'>
+            <input class="text edit-project" id='to-do-item-edit-input' placeholder="To do Item name"/>
+            <span class="low-priority to-do-priority-selector"></span>
+            <span class="medium-priority to-do-priority-selector"></span>
+            <span class="high-priority to-do-priority-selector"></span>
+            <span class="uh-priority to-do-priority-selector"></span>
+          </li>
+          <li class="to-do-item high-priority">
+            <p>Item in list #1</p>
+          </li>
+          <li class="to-do-item checked uh-priority">
+            <p>Item in list #2</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+   
+    <script src="bundle.js"></script>
   </body>
 </html>
