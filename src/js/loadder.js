@@ -156,8 +156,6 @@ function sortToDos() {
   }
 
   toDoContainers.sort(sortToDo);
-  console.log(toDoContainers);
-
   toDoContainers.forEach( toDoElement => toDoElement.parentNode.appendChild(toDoElement) );
 }
 
