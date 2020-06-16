@@ -24,8 +24,8 @@ function loadSideBarToggle(){
   let hamburgerIcon = document.getElementById('hamburger-icon-click');
   let sidebar = document.getElementById('sidebar');
 
-  hamburgerIcon.addEventListener('click',toggleSidebar,false);
-  fHamburgerIcon.addEventListener('click',toggleSidebar,false);
+  hamburgerIcon.onclick = toggleSidebar;
+  fHamburgerIcon.onclick = toggleSidebar;
 }
 
 // Project logic
@@ -47,15 +47,15 @@ function sortProjects(){
 function loadStorageProjects() {
   let projects = Storage.readProjects();
   projects.forEach( project => { loadNewProject(project,false) });
-  if(projects.length > 1) { handleProjectSelect(document.getElementById('projects-container').firstElementChild) } 
+  if(projects.length > 0) { handleProjectSelect(document.getElementById('projects-container').firstElementChild) } 
 }
 
 function loadAddProject() {
   let addProjectButton = document.getElementById('add-project-icon');
   let addToDoButton = document.getElementById('add-to-do-icon');
 
-  addProjectButton.addEventListener('click', loadNewProject);
-  addToDoButton.addEventListener('click', loadNewToDo);
+  addProjectButton.onclick = loadNewProject;
+  addToDoButton.onclick = loadNewToDo;
 }
 
 function loadToDoChecklist(toDoList) {
@@ -89,7 +89,7 @@ function loadClickableProjects() {
   let projectItems = Array.from(document.getElementsByClassName('to-do-project'));
 
   projectItems.forEach( projectItem => {
-    projectItem.addEventListener('click', (e) => {
+    projectItem.onclick = (e) => {
       let targetClassList = e.target.classList;
       if(targetClassList.contains('delete-icon')){
         let editContainer = document.getElementsByClassName('to-do-edit')[0];
@@ -105,7 +105,7 @@ function loadClickableProjects() {
 
         handleProjectSelect(projectItem);
       }
-    })
+    }
   });
 }
 
@@ -172,7 +172,7 @@ function loadNewToDo() {
 
   inputText.focus();
   prioritySelectors.forEach( prioritySelector => { 
-    prioritySelector.addEventListener('click', () => { handleToDoPrioritySelectorExit(prioritySelector)});
+    prioritySelector.onclick = () => { handleToDoPrioritySelectorExit(prioritySelector)};
   });
   loadToDoChecker();
 }
@@ -181,7 +181,7 @@ function loadToDoChecker() {
   let toDoItems = Array.from(document.getElementsByClassName('to-do-item'));
 
   toDoItems.forEach( item => {
-    item.addEventListener('click', e => {
+    item.onclick = (e) => {
       if(e.target.classList.contains('enter-edit-mode')){
         enterEditToDo(item);
       } else {
@@ -189,7 +189,7 @@ function loadToDoChecker() {
         sortToDos();
         saveToDoItems();
       }
-    });
+    };
   });
 }
 
@@ -197,7 +197,7 @@ function loadPrioritySelector() {
   let prioritySelector = Array.from(document.getElementsByClassName('priority-selector'));
 
   prioritySelector.forEach( selectedPriority => { 
-    selectedPriority.addEventListener('click', () => { handlePrioritySelectorExit(selectedPriority) })
+    selectedPriority.onclick = () => { handlePrioritySelectorExit(selectedPriority) }
   });
 }
 
@@ -207,6 +207,8 @@ function handleToDoPrioritySelectorExit(selectedPriority) {
   let newToDoElement = Factory.toDoItem({text,priority});
   let toDoContainer = document.getElementById('to-do-container');
   let editToDo = document.getElementById('to-do-item-edit')
+
+  if(text.length === 0 || !text.trim()) return;
 
   editToDo.remove();
   toDoContainer.insertBefore(newToDoElement, toDoContainer.firstChild);
@@ -251,10 +253,12 @@ function enterEditToDo(toDoItem) {
 
   inputText.focus();
   prioritySelectors.forEach( prioritySelector => { 
-    prioritySelector.addEventListener('click', () => { handleToDoPrioritySelectorExit(prioritySelector)});
+    prioritySelector.onclick = () => { handleToDoPrioritySelectorExit(prioritySelector)};
   });
 
-  deleteToDo.addEventListener('click', () => { toDoEdit.remove() });
+  deleteToDo.onclick = () => { 
+    toDoEdit.remove()
+  };
 }
 
 // Aux methods
