@@ -183,7 +183,6 @@ function saveToDoItems(){
   let toDoContainer = document.getElementById('to-do-container');
   let toDoItems = Array.from(toDoContainer.children).filter(item => !item.classList.contains('to-do-item-edit'));
   let toDoList = toDoItems.map( toDoItem => {
-    console.log(toDoItem.children)
     return {
       priority: toDoItem.lastElementChild.classList[0],
       checked: toDoItem.classList.contains('checked'),

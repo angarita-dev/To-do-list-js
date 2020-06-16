@@ -42,7 +42,6 @@ function toDoList(toDoItemsList){
 }
 
 function toDoItem({text,priority,checked=false}){
-  console.log({text,priority,checked});
   let template = document.createElement('template');
   let checkedClass = checked ? 'checked' : '';
   let html = `

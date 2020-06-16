@@ -20,7 +20,6 @@ function exitProjectEditMode(editContainer) {
 function enterProjectEditMode(projectContainer) {
   let titleText = projectContainer.childNodes[1].childNodes[1].innerHTML;
   let inputText = projectContainer.childNodes[3].childNodes[1];
-  console.log(titleText);
   projectContainer.classList.add('to-do-edit');
   inputText.value = titleText
   inputText.focus();
