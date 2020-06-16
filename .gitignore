@@ -3,3 +3,6 @@ package-lock.json
 
 # ignores node-modules
 node_modules/
+
+# ignores swap files
+*.swp

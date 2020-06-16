@@ -1,4 +1,5 @@
-@import '../shared';
+@import '../shared/variables';
+@import '../shared/mixins';
 
 .container {
   @include flex-column;
