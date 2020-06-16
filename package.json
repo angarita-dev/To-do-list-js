@@ -4,7 +4,8 @@
   "description": "To-do list in plain JS",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js && sass src/style/main.scss dist/stylesheet.css",
+    "build": "webpack --config webpack.config.js --mode=production && sass src/style/main.scss dist/stylesheet.css --style compressed",
+    "build-dev": "webpack --config webpack.config.js && sass src/style/main.scss dist/stylesheet.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
