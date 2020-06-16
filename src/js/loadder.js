@@ -9,6 +9,7 @@ function firstTimeLoad(){
   // Project logic
   loadAddProject();
   loadStorageProjects();
+  sortProjects();
   loadClickableProjects();
 
   // To-do Logic
@@ -30,13 +31,17 @@ function loadSideBarToggle(){
 // Project logic
 
 function sortProjects(){
-  let toDoProjects = document.getElementById('projects-container').childNodes;
-
+  let toDoProjects = Array.from(document.getElementById('projects-container').children);
+  let modelPriority = ['low-priority','medium-priority','high-priority','uh-priority'];
   let sortByChildrenPriority = (a,b) => {
-    let modelPriority = ['low-priority','medium-priority','high-priority','uh-priority'];
-    
+    let aIndex = modelPriority.findIndex( element => element === a.firstElementChild.classList[2] );
+    let bIndex = modelPriority.findIndex( element => element === b.firstElementChild.classList[2] );
+    return bIndex < a.Index ? 1 : bIndex < aIndex ? -1 : 0; 
   }
 
+  toDoProjects.sort(sortByChildrenPriority);
+
+  toDoProjects.forEach( toDoProject => { toDoProject.parentNode.appendChild(toDoProject) } )
 }
 
 function loadStorageProjects() {
@@ -114,8 +119,24 @@ function handleProjectSelect(projectItem) {
   loadToDoChecklist(project.toDo);
 }
 
+function handlePrioritySelectorExit(selectedPriority) {
+  let selectedPriorityClass = selectedPriority.classList[0];
+  let savedText = selectedPriority.parentElement.firstElementChild.value;
+  let projectContainer = selectedPriority.parentNode.parentNode.firstElementChild;
+
+  projectContainer.classList.remove('uh-priority','high-priority','medium-priority','low-priority');
+  projectContainer.classList.add(selectedPriorityClass);
+  projectContainer.parentElement.firstElementChild.firstElementChild.innerHTML = savedText;
+
+  sortProjects();
+  Storage.saveProject({
+    title: savedText,
+    priority: selectedPriorityClass, 
+    index: getSelectedProjectIndex()});
+}
 
 // To-do logic
+
 
 function loadNewToDo() {
   let toDoEdit = Factory.toDoListEdit();
@@ -157,22 +178,6 @@ function loadPrioritySelector() {
     selectedPriority.addEventListener('click', () => { handlePrioritySelectorExit(selectedPriority) })
   });
 }
-
-function handlePrioritySelectorExit(selectedPriority) {
-  let selectedPriorityClass = selectedPriority.classList[0];
-  let savedText = selectedPriority.parentElement.firstElementChild.value;
-  let projectContainer = selectedPriority.parentNode.parentNode.firstElementChild;
-
-  projectContainer.classList.remove('uh-priority','high-priority','medium-priority','low-priority');
-  projectContainer.classList.add(selectedPriorityClass);
-  projectContainer.parentElement.firstElementChild.firstElementChild.innerHTML = savedText;
-
-  Storage.saveProject({
-    title: savedText,
-    priority: selectedPriorityClass, 
-    index: getSelectedProjectIndex()});
-}
-
 
 function handleToDoPrioritySelectorExit(selectedPriority) {
   let priority = selectedPriority.classList[0];
