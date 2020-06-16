@@ -22,6 +22,15 @@
     padding: 0;
     width: 100%;
     list-style: none;
+    .empty-to-do {
+      @include flex-row;
+      justify-content: center;
+      align-items: center;
+      color: $light-white;
+      font-weight: 400;
+      font-family: $text-font;
+      p { margin: 0 1em; }
+    }
     .to-do-item {
       @include flex-row;
       color: $light-white;
