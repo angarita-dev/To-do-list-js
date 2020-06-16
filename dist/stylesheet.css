@@ -134,11 +134,14 @@ body .text {
 .side-bar .projects-container .to-do-project .icon {
   margin: auto 0.5em;
   display: none;
+  cursor: default;
 }
 .side-bar .projects-container .to-do-project .icon .edit-icon {
+  cursor: pointer;
   display: block;
 }
 .side-bar .projects-container .to-do-project .icon .delete-icon {
+  cursor: pointer;
   display: none;
 }
 .side-bar .projects-container .to-do-project .edit-container {

@@ -43,8 +43,15 @@
       .icon {
         margin: auto 0.5em;
         display: none;
-        .edit-icon { display: block; }
-        .delete-icon { display: none; }
+        cursor: default;
+        .edit-icon { 
+          cursor: pointer;
+          display: block;
+        }
+        .delete-icon { 
+          cursor: pointer;
+          display: none;
+        }
       }
       .edit-container { display: none; }
       &.selected {
