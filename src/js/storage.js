@@ -46,7 +46,6 @@ function saveToDo({index, toDoList}){
   let oldProjects = localStorage.getItem('projects');
 
   newProjects = JSON.parse(oldProjects);
-  console.log( newProjects[index].toDo);
   newProjects[index].toDo = toDoList;
 
   localStorage.clear();
