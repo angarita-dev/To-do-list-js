@@ -117,6 +117,7 @@ function handleProjectSelect(projectItem) {
   projectTitle.classList.add(`title-${project.priority}`);
   projectTitle.textContent = project.title;
   loadToDoChecklist(project.toDo);
+  sortToDos();
 }
 
 function handlePrioritySelectorExit(selectedPriority) {
@@ -137,6 +138,26 @@ function handlePrioritySelectorExit(selectedPriority) {
 
 // To-do logic
 
+function sortToDos() {
+  let toDoContainers = Array.from(document.getElementById('to-do-container').children);
+  let modelPriority = ['uh-priority','high-priority','medium-priority','low-priority'];
+
+  let sortToDo = (a,b) => {
+    if(a.classList.contains('checked') && !b.classList.contains('checked')) return 1;
+    if(a.classList.contains('checked') && b.classList.contains('checked')) return 0;
+    if(!a.classList.contains('checked') && b.classList.contains('checked')) return -1;
+
+    let aPriority = modelPriority.findIndex( element => element === a.lastElementChild.classList[0]);
+    let bPriority = modelPriority.findIndex( element => element === b.lastElementChild.classList[0]);
+
+    return aPriority < bPriority ? -1 : aPriority > bPriority ? 1 : 0;
+  }
+
+  toDoContainers.sort(sortToDo);
+  console.log(toDoContainers);
+
+  toDoContainers.forEach( toDoElement => toDoElement.parentNode.appendChild(toDoElement) );
+}
 
 function loadNewToDo() {
   let toDoEdit = Factory.toDoListEdit();
@@ -165,6 +186,7 @@ function loadToDoChecker() {
         enterEditToDo(item);
       } else {
         itemCheck(item);
+        sortToDos();
         saveToDoItems();
       }
     });
@@ -190,6 +212,7 @@ function handleToDoPrioritySelectorExit(selectedPriority) {
   toDoContainer.insertBefore(newToDoElement, toDoContainer.firstChild);
   loadToDoChecker();
 
+  sortToDos();
   saveToDoItems();
 }
 
