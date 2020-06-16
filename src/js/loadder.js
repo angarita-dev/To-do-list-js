@@ -1,8 +1,11 @@
-import { itemCheck, projectSelect, exitProjectEditMode, enterProjectEditMode } from './toggler.js';
+import { itemCheck, projectSelect, exitProjectEditMode, enterProjectEditMode, toggleSidebar } from './toggler.js';
 import * as Factory from './factories.js'; 
 import * as Storage from './storage.js';
 
 function firstTimeLoad(){
+  // Side bar toggle
+  loadSideBarToggle();
+
   // Project logic
   loadAddProject();
   loadStorageProjects();
@@ -12,9 +15,29 @@ function firstTimeLoad(){
 
   loadToDoChecker();
   loadPrioritySelector();
-};
+}
+// Side bar
+
+function loadSideBarToggle(){
+  let fHamburgerIcon = document.getElementById('f-hamburger-icon-click');
+  let hamburgerIcon = document.getElementById('hamburger-icon-click');
+  let sidebar = document.getElementById('sidebar');
+
+  hamburgerIcon.addEventListener('click',toggleSidebar,false);
+  fHamburgerIcon.addEventListener('click',toggleSidebar,false);
+}
 
 // Project logic
+
+function sortProjects(){
+  let toDoProjects = document.getElementById('projects-container').childNodes;
+
+  let sortByChildrenPriority = (a,b) => {
+    let modelPriority = ['low-priority','medium-priority','high-priority','uh-priority'];
+    
+  }
+
+}
 
 function loadStorageProjects() {
   let projects = Storage.readProjects();

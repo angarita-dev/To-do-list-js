@@ -1,3 +1,22 @@
+function toggleSidebar() {
+  let fHamburgerIcon = document.getElementById('f-hamburger-icon-click');
+  let hamburgerIcon = document.getElementById('hamburger-icon-click');
+  let sidebar = document.getElementById('sidebar');
+
+  if(sidebar.classList.contains('slide-out')){
+    console.log('inside if');
+    sidebar.classList.remove('slide-out');
+    sidebar.classList.add('slide-in');
+    fHamburgerIcon.classList.remove('slide-in');
+    fHamburgerIcon.classList.add('slide-out');
+  } else {
+    sidebar.classList.remove('slide-in');
+    sidebar.classList.add('slide-out');
+    fHamburgerIcon.classList.remove('slide-out');
+    fHamburgerIcon.classList.add('slide-in');
+  }
+}
+
 function itemCheck(toDoItem) {
   toDoItem.classList.contains('checked') ? 
     toDoItem.classList.remove('checked') :
@@ -25,4 +44,4 @@ function enterProjectEditMode(projectContainer) {
   inputText.focus();
 }
 
-export { itemCheck, projectSelect, exitProjectEditMode, enterProjectEditMode };
+export { itemCheck, projectSelect, exitProjectEditMode, enterProjectEditMode, toggleSidebar };
