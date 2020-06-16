@@ -264,6 +264,9 @@ body .text {
   font-weight: 400;
   font-family: "Open Sans", sans-serif;
 }
+.container .to-do-container .to-do-item p {
+  cursor: pointer;
+}
 .container .to-do-container .to-do-item span {
   margin-left: 2em;
 }

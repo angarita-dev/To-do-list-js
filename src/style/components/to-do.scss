@@ -36,6 +36,7 @@
       color: $light-white;
       font-weight: 400;
       font-family: $text-font;
+      p { cursor: pointer; }
       span { margin-left: 2em; }
     }
     .to-do-item-edit{
