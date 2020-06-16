@@ -207,6 +207,9 @@ body .text {
   align-items: center;
   width: 80%;
 }
+.side-bar .projects-container .to-do-project.selected.to-do-edit .edit-container .priority-selector {
+  cursor: pointer;
+}
 .side-bar .projects-container .to-do-project.selected.to-do-edit .edit-container .edit-project {
   background-color: #333333;
   color: #d9d9d9;
@@ -264,7 +267,7 @@ body .text {
   font-weight: 400;
   font-family: "Open Sans", sans-serif;
 }
-.container .to-do-container .to-do-item p {
+.container .to-do-container .to-do-item p, .container .to-do-container .to-do-item span {
   cursor: pointer;
 }
 .container .to-do-container .to-do-item span {
