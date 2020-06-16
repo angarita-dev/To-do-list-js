@@ -47,6 +47,7 @@ function sortProjects(){
 function loadStorageProjects() {
   let projects = Storage.readProjects();
   projects.forEach( project => { loadNewProject(project,false) });
+  if(projects.length > 1) { handleProjectSelect(document.getElementById('projects-container').firstElementChild) } 
 }
 
 function loadAddProject() {
@@ -73,10 +74,11 @@ function loadNewProject({title,priority='low-priority',toDo=[]}, creatingProject
   let newProject = Factory.project({title,priority,toDo});
   
   projectContainer.appendChild(newProject);
-  loadClickableProjects();
-  loadPrioritySelector();
-
+  
   if(creatingProject){
+    loadClickableProjects();
+    loadPrioritySelector();
+
     Storage.saveProject({title: 'To-do'});
     handleProjectSelect(newProject);
     enterProjectEditMode(newProject);
