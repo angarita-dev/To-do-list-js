@@ -7,7 +7,6 @@ function firstTimeLoad(){
   loadAddProject();
   loadStorageProjects();
   loadClickableProjects();
-  loadEditIcons();
 
   // To-do Logic
 
@@ -47,7 +46,6 @@ function loadNewProject({title,priority='low-priority',toDo=[]}, creatingProject
   
   projectContainer.appendChild(newProject);
   loadClickableProjects();
-  loadEditIcons();
   loadPrioritySelector();
 
   if(creatingProject){
@@ -63,10 +61,20 @@ function loadClickableProjects() {
   projectItems.forEach( projectItem => {
     projectItem.addEventListener('click', (e) => {
       let targetClassList = e.target.classList;
-      if(targetClassList.contains('edit-icon') || targetClassList.contains('icon')){ return false }
+      if(targetClassList.contains('delete-icon')){
+        let editContainer = document.getElementsByClassName('to-do-edit')[0];
 
+        if(editContainer){
+          Storage.deleteProject(getSelectedProjectIndex());
+          editContainer.remove();
+        }
+      } else if(targetClassList.contains('edit-icon')){
 
-      handleProjectSelect(projectItem);
+         enterProjectEditMode(projectItem);
+      } else {
+
+        handleProjectSelect(projectItem);
+      }
     })
   });
 }
@@ -83,28 +91,6 @@ function handleProjectSelect(projectItem) {
   loadToDoChecklist(project.toDo);
 }
 
-function loadDeleteProject() {
-  let editContainer = document.getElementsByClassName('to-do-edit')[0];
-  let editIcon = editContainer.lastElementChild;
-  editIcon.addEventListener('click', (e) => { 
-    if(!e.target.classList.contains('delete-icon')) return false
-
-    Storage.deleteProject(getSelectedProjectIndex());
-    editContainer.remove();
-  });
-}
-
-function loadEditIcons() {
-  let editIcons = Array.from(document.getElementsByClassName('edit-icon'));
-
-  editIcons.forEach( editIcon => {
-    let projectContainer = editIcon.parentElement.parentElement;
-    editIcon.parentElement.addEventListener('click', () => {
-      enterProjectEditMode(projectContainer);
-      loadDeleteProject();
-    });
-  });
-}
 
 // To-do logic
 
