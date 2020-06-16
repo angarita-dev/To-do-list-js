@@ -147,16 +147,22 @@ body .text {
 .side-bar .projects-container .to-do-project.selected {
   background-color: #333333;
 }
-.side-bar .projects-container .to-do-project.selected .text-container {
+.side-bar .projects-container .to-do-project.selected.to-do-edit .text-container {
   display: none !important;
 }
-.side-bar .projects-container .to-do-project.selected .edit-container {
+.side-bar .projects-container .to-do-project.selected.to-do-edit .edit-icon {
+  display: none !important;
+}
+.side-bar .projects-container .to-do-project.selected.to-do-edit .delete-icon {
+  display: block !important;
+}
+.side-bar .projects-container .to-do-project.selected.to-do-edit .edit-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 80%;
 }
-.side-bar .projects-container .to-do-project.selected .edit-container .edit-project {
+.side-bar .projects-container .to-do-project.selected.to-do-edit .edit-container .edit-project {
   background-color: #333333;
   color: #d9d9d9;
   border: none;
@@ -166,12 +172,6 @@ body .text {
 .side-bar .projects-container .to-do-project.selected .icon {
   display: block;
   min-width: 24px;
-}
-.side-bar .projects-container .to-do-project.to-do-edit .edit-icon {
-  display: none !important;
-}
-.side-bar .projects-container .to-do-project.to-do-edit .delete-icon {
-  display: block !important;
 }
 
 .container {
