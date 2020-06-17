@@ -152,7 +152,6 @@ function handleToDoPrioritySelectorExit(selectedPriority) {
   sortToDos();
 }
 
-
 function handlePrioritySelectorExit(selectedPriority) {
   const selectedPriorityClass = selectedPriority.classList[0];
   const savedText = selectedPriority.parentElement.firstElementChild.value;
