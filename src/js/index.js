@@ -1,3 +1,3 @@
-import { firstTimeLoad } from './loadder.js';
+import firstTimeLoad from './loadder';
 
 firstTimeLoad();

@@ -3,6 +3,7 @@
 
 .hamburger-container {
   @include flex-column;
+
   justify-content: center;
   align-items: center;
 }
@@ -24,4 +25,3 @@
   padding: 1%;
   margin: auto;
 }
-

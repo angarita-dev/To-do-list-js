@@ -1,10 +1,8 @@
 function toggleSidebar() {
-  let fHamburgerIcon = document.getElementById('f-hamburger-icon-click');
-  let hamburgerIcon = document.getElementById('hamburger-icon-click');
-  let sidebar = document.getElementById('sidebar');
+  const fHamburgerIcon = document.getElementById('f-hamburger-icon-click');
+  const sidebar = document.getElementById('sidebar');
 
-  if(sidebar.classList.contains('slide-out')){
-    console.log('inside if');
+  if (sidebar.classList.contains('slide-out')) {
     sidebar.classList.remove('slide-out');
     sidebar.classList.add('slide-in');
     fHamburgerIcon.classList.remove('slide-in');
@@ -18,30 +16,38 @@ function toggleSidebar() {
 }
 
 function itemCheck(toDoItem) {
-  toDoItem.classList.contains('checked') ? 
-    toDoItem.classList.remove('checked') :
-    toDoItem.classList.add('checked')
-}
-
-function projectSelect(selectedProjectContainer) {
-  let projectContainers = Array.from(document.getElementsByClassName('to-do-project'));
-  projectContainers.map( projectContainer => {
-    projectContainer.classList.remove('selected');
-    exitProjectEditMode(projectContainer);
-  });
-  selectedProjectContainer.classList.add('selected');
+  if (toDoItem.classList.contains('checked')) {
+    toDoItem.classList.remove('checked');
+  } else {
+    toDoItem.classList.add('checked');
+  }
 }
 
 function exitProjectEditMode(editContainer) {
   editContainer.classList.remove('to-do-edit');
 }
 
+function projectSelect(selectedProjectContainer) {
+  const projectContainers = Array.from(document.getElementsByClassName('to-do-project'));
+  projectContainers.forEach(projectContainer => {
+    projectContainer.classList.remove('selected');
+    exitProjectEditMode(projectContainer);
+  });
+  selectedProjectContainer.classList.add('selected');
+}
+
 function enterProjectEditMode(projectContainer) {
-  let titleText = projectContainer.childNodes[1].childNodes[1].innerHTML;
-  let inputText = projectContainer.childNodes[3].childNodes[1];
+  const titleText = projectContainer.childNodes[1].childNodes[1].innerHTML;
+  const inputText = projectContainer.childNodes[3].childNodes[1];
   projectContainer.classList.add('to-do-edit');
-  inputText.value = titleText
+  inputText.value = titleText;
   inputText.focus();
 }
 
-export { itemCheck, projectSelect, exitProjectEditMode, enterProjectEditMode, toggleSidebar };
+export {
+  itemCheck,
+  projectSelect,
+  exitProjectEditMode,
+  enterProjectEditMode,
+  toggleSidebar,
+};

@@ -1,7 +1,7 @@
 // Project logic
-function project({title='To-do',priority='low-priority'}){
-  let template = document.createElement('template');
-  let html = `
+function project({ title = 'To-do', priority = 'low-priority' }) {
+  const template = document.createElement('template');
+  const html = `
     <li class='to-do-project'>
       <div class='project-container text-container ${priority}'>
         <h4 class='text'>${title}</h4>
@@ -24,27 +24,10 @@ function project({title='To-do',priority='low-priority'}){
 }
 
 // To-do logic
-
-function toDoList(toDoItemsList){
-  let toDoContainer = document.createElement('ul');
-  toDoContainer.classList.add('to-do-container');
-  toDoContainer.setAttribute('id','to-do-container');
-  toDoItemsList.map( toDoElement => {
-    let text;
-    let priority;
-    let checked;
-    ({text,priority,checked} = toDoElement);
-    toDoContainer.appendChild(
-      toDoItem({text,priority,checked})
-    );
-  });
-  return toDoContainer;
-}
-
-function toDoItem({text,priority,checked=false}){
-  let template = document.createElement('template');
-  let checkedClass = checked ? 'checked' : '';
-  let html = `
+function toDoItem({ text, priority, checked = false }) {
+  const template = document.createElement('template');
+  const checkedClass = checked ? 'checked' : '';
+  const html = `
     <li class="to-do-item ${checkedClass}">
       <p>${text}</p>
       <span class="${priority} enter-edit-mode"/>
@@ -54,8 +37,20 @@ function toDoItem({text,priority,checked=false}){
   return template.content.firstChild;
 }
 
-function toDoListEdit(value='') {
-  let template = document.createElement('template');
+function toDoList(toDoItemsList) {
+  const toDoContainer = document.createElement('ul');
+  toDoContainer.classList.add('to-do-container');
+  toDoContainer.setAttribute('id', 'to-do-container');
+  toDoItemsList.forEach(toDoElement => {
+    toDoContainer.appendChild(
+      toDoItem(toDoElement),
+    );
+  });
+  return toDoContainer;
+}
+
+function toDoListEdit(value = '') {
+  const template = document.createElement('template');
   template.innerHTML = `
     <li class="to-do-item-edit" id='to-do-item-edit'>
       <input class="text edit-project" id='to-do-item-edit-input' value="${value}" placeholder="To do Item name"/>
@@ -71,4 +66,6 @@ function toDoListEdit(value='') {
   return template.content.firstChild;
 }
 
-export { project, toDoList, toDoItem, toDoListEdit };
+export {
+  project, toDoList, toDoItem, toDoListEdit,
+};
