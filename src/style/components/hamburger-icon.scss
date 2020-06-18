@@ -1,0 +1,27 @@
+@import "../shared/variables";
+@import "../shared/mixins";
+
+.hamburger-container {
+  @include flex-column;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.hamburger-icon {
+  fill: $light-white;
+  width: 1.75em;
+  height: 1.75em;
+}
+
+.floating-container {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background-color: $light-grey;
+  border-radius: 50%;
+  height: 1.75em;
+  width: 1.75em;
+  padding: 1%;
+  margin: auto;
+}

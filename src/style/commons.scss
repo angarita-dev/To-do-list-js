@@ -1,0 +1,57 @@
+@import "shared/variables";
+@import "shared/mixins";
+
+html {
+  height: 100%;
+}
+
+body {
+  @include flex-row;
+
+  height: 100%;
+  margin: 0;
+  background-color: $dark-grey;
+  justify-content: center;
+
+  .title {
+    margin: 0 auto;
+    color: $white;
+    font-family: $title-font;
+  }
+
+  .text {
+    font-family: $text-font;
+    font-weight: 400;
+  }
+}
+
+.icon {
+  cursor: pointer;
+  fill: $light-white;
+  height: 1.5em;
+  width: 1.5em;
+}
+
+.uh-priority::after {
+  @include priority-dot;
+
+  color: $ultra-high-priority;
+}
+
+.high-priority::after {
+  @include priority-dot;
+
+  color: $high-priority;
+}
+
+.medium-priority::after {
+  @include priority-dot;
+
+  color: $medium-priority;
+}
+
+.low-priority::after {
+  @include priority-dot;
+
+  color: $low-priority;
+}
