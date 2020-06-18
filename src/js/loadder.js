@@ -275,6 +275,9 @@ function loadAddProject() {
 
 
 function firstTimeLoad() {
+  // Load tutorial
+  if (Storage.shouldAddTutorial()) Storage.addTutorial();
+
   // Side bar toggle
   loadSideBarToggle();
 
