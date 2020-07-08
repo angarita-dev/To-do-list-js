@@ -98,7 +98,6 @@ function loadToDoChecker() {
         if (currentEdit) currentEdit.remove();
         toDoContainer.insertBefore(toDoEdit, toDoContainer.firstChild);
 
-
         const inputText = document.getElementById('to-do-item-edit-input');
         const prioritySelectors = Array.from(document.getElementsByClassName('to-do-priority-selector'));
 
@@ -272,7 +271,6 @@ function loadAddProject() {
 }
 
 // To-do logic
-
 
 function firstTimeLoad() {
   // Load tutorial

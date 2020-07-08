@@ -1,80 +1,79 @@
-import * as Factory from 'factory';
+import * as Factory from './factory';
+
 class Display {
-	static removeSelected() {
-		const projectsSelected = document.getElementsByClassName('selected');
+  static removeSelected() {
+    const projectsSelected = document.getElementsByClassName('selected');
 
-		projectsSelected.forEach(project => project.classList.remove('selected')); 
-	}
+    projectsSelected.forEach(project => project.classList.remove('selected'));
+  }
 
-	selectProject() {
-		removeSelected();
+  selectProject() {
+    this.removeSelected();
 
-		this.projectContainer.classList.add('selected');
-	}
+    this.projectContainer.classList.add('selected');
+  }
 
-	editProject(handleFunction) {
-		const editContainer = this.projectContainer.querySelector('.edit-container');
-		const prioritySelectors = this.projectContainer.querySelector('.priority-selector');	
+  editProject(handleFunction) {
+    const editContainer = this.projectContainer.querySelector('.edit-container');
+    const prioritySelectors = this.projectContainer.querySelector('.priority-selector');
 
-		prioritySelectors.forEach( prioritySelector => {
-			const projectName = editContainer.querySelector('#edit-project').value; 
-			const selectedPriority = Array.from(prioritySelector.classList)
-															   .filter(className => className.includes('-priority'))[0];
-			
-			this.projectContainer.classList.remove('to-do-edit');
-			handleFunction(projectName, selectedPriority);
-		});
-	}
+    prioritySelectors.forEach(prioritySelector => {
+      const projectName = editContainer.querySelector('#edit-project').value;
+      const selectedPriority = Array.from(prioritySelector.classList)
+        .filter(className => className.includes('-priority'))[0];
 
-	static displayProject(title, priority) {
-		const projectsContainer = document.getElementById('projects-container');
-		const project = Factory.project(title, priority);
+      this.projectContainer.classList.remove('to-do-edit');
+      handleFunction(projectName, selectedPriority);
+    });
+  }
 
-		projectsContainer.append(project);
-		return project;
-	}
+  static displayProject(title, priority) {
+    const projectsContainer = document.getElementById('projects-container');
+    const project = Factory.project(title, priority);
 
-	loaders(handleProjectEdit, handleProjectDelete) {
-		const iconContainer = this.projectContainer.querySelector('.icon');
+    projectsContainer.append(project);
+    return project;
+  }
 
-		const iconEdit = iconContainer.querySelector('.edit-icon');
-		const iconDelete = iconContainer.querySelector('.delete-icon');
+  loaders(handleProjectEdit, handleProjectDelete) {
+    const iconContainer = this.projectContainer.querySelector('.icon');
 
-		this.projectContainer.onclick = () => { selectProject() };
-		iconEdit.onclick = () => { 
-			this.projectContainer.classList.add('to-do-edit');
-			handleProjectEdit();
-		};
-		iconDelete.onclick = () => { handleProjectDelete() };
-	}
+    const iconEdit = iconContainer.querySelector('.edit-icon');
+    const iconDelete = iconContainer.querySelector('.delete-icon');
 
-	constructor(title, priority, handleProjectEdit, handleProjectDelete) {
-		this.projectContainer = displayProject(title, priority);
+    this.projectContainer.onclick = () => { this.selectProject(); };
+    iconEdit.onclick = () => {
+      this.projectContainer.classList.add('to-do-edit');
+      handleProjectEdit();
+    };
+    iconDelete.onclick = () => { handleProjectDelete(); };
+  }
 
-		loaders(handleProjectEdit, handleProjectDelete);
-	}
+  constructor(title, priority, handleProjectEdit, handleProjectDelete) {
+    this.projectContainer = this.displayProject(title, priority);
 
-	changeTitle(newTitle) {
-		const textContainerElement = this.projectContainer.querySelector('.text-container');	
-		const titleElement = titleElement.querySelector('.text');
+    this.loaders(handleProjectEdit, handleProjectDelete);
+  }
 
-		titleElement.textContent = newTitle;
-	}
+  changeTitle(newTitle) {
+    const textContainerElement = this.projectContainer.querySelector('.text-container');
+    const titleElement = textContainerElement.querySelector('.text');
 
-	changePriority(newPriority) {
-		const priorityContainer = this.projectContainer.firstElementChild;
+    titleElement.textContent = newTitle;
+  }
 
-		const previousPriority = priorityContainer.classList.filter( className => { 
-			return className.includes('-priority')
-		})[0]; 
+  changePriority(newPriority) {
+    const priorityContainer = this.projectContainer.firstElementChild;
 
-		priorityContainer.classList.remove(previousPriority);
-		priorityContainer.classList.add(newPriority);
-	}
+    const previousPriority = priorityContainer.classList.filter(className => className.includes('-priority'))[0];
 
-	removeElement() {
-		this.projectContainer.remove();
-	}
+    priorityContainer.classList.remove(previousPriority);
+    priorityContainer.classList.add(newPriority);
+  }
+
+  removeElement() {
+    this.projectContainer.remove();
+  }
 }
 
 export default Display;
