@@ -1,29 +1,36 @@
-import * as Factory from './factory';
+import Factory from './factory';
 
 class Display {
   static removeSelected() {
-    const projectsSelected = document.getElementsByClassName('selected');
+    const projectsSelected = Array.from(document.getElementsByClassName('selected'));
 
     projectsSelected.forEach(project => project.classList.remove('selected'));
   }
 
   selectProject() {
-    this.removeSelected();
+    Display.removeSelected();
 
     this.projectContainer.classList.add('selected');
   }
 
   editProject(handleFunction) {
+    const textContainerElement = this.projectContainer.querySelector('.text-container');
+    const titleElement = textContainerElement.querySelector('.text');
+
     const editContainer = this.projectContainer.querySelector('.edit-container');
-    const prioritySelectors = this.projectContainer.querySelector('.priority-selector');
+    const prioritySelectors = Array.from(editContainer.querySelectorAll('.priority-selector'));
+    const nameInputElement = editContainer.querySelector('.edit-project');
 
+    nameInputElement.value = titleElement.textContent;
     prioritySelectors.forEach(prioritySelector => {
-      const projectName = editContainer.querySelector('#edit-project').value;
-      const selectedPriority = Array.from(prioritySelector.classList)
-        .filter(className => className.includes('-priority'))[0];
+      prioritySelector.onclick = () => {
+        const projectName = nameInputElement.value;
+        const selectedPriority = Array.from(prioritySelector.classList)
+          .filter(className => className.includes('-priority'))[0];
 
-      this.projectContainer.classList.remove('to-do-edit');
-      handleFunction(projectName, selectedPriority);
+        this.projectContainer.classList.remove('to-do-edit');
+        handleFunction(projectName, selectedPriority);
+      }
     });
   }
 
@@ -50,7 +57,7 @@ class Display {
   }
 
   constructor(title, priority, handleProjectEdit, handleProjectDelete) {
-    this.projectContainer = this.displayProject(title, priority);
+    this.projectContainer = Display.displayProject(title, priority);
 
     this.loaders(handleProjectEdit, handleProjectDelete);
   }
@@ -65,7 +72,8 @@ class Display {
   changePriority(newPriority) {
     const priorityContainer = this.projectContainer.firstElementChild;
 
-    const previousPriority = priorityContainer.classList.filter(className => className.includes('-priority'))[0];
+    const previousPriority = Array.from(priorityContainer.classList)
+      .filter(className => className.includes('-priority'))[0];
 
     priorityContainer.classList.remove(previousPriority);
     priorityContainer.classList.add(newPriority);

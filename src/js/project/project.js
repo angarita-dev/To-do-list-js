@@ -7,7 +7,7 @@ class Project {
       this.name = name;
       this.priority = priority;
 
-      this.display.changeName(this.name);
+      this.display.changeTitle(this.name);
       this.display.changePriority(this.priority);
       ProjectStorage.saveProject(this.name, this.priority, this.index);
     };
@@ -21,16 +21,19 @@ class Project {
     ProjectStorage.deleteProject(this.index);
   }
 
+  displayProject() {
+    console.log(this.name);
+    this.display = new ProjectDisplay(this.name,
+                    this.priority,
+                    this.handleProjectEdit.bind(this),
+                    this.handleProjectDelete.bind(this));
+  }
+
   constructor(name = 'To-do Project', priority = 'low-priority', toDos = [], index = -1) {
     this.name = name;
     this.priority = priority;
     this.toDos = toDos;
     this.index = index;
-
-    this.display = new ProjectDisplay(this.name,
-      this.priority,
-      this.handleProjectEdit.bind(this),
-      this.handleProjectDelete.bind(this));
   }
 }
 
