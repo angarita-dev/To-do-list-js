@@ -59,11 +59,11 @@
         justify-content: space-between;
         cursor: default;
 
-        .edit-icon, .delete-icon {
+        .edit-icon,
+        .delete-icon {
           display: block;
           cursor: pointer;
         }
-
       }
       .edit-container { display: none; }
 
@@ -91,7 +91,6 @@
             }
           }
         }
-
       }
     }
   }

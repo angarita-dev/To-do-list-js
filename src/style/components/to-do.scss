@@ -54,6 +54,73 @@
         display: none;
       }
 
+      &.edit {
+        .to-do-date,
+        .to-do-title,
+        .to-do-priority,
+        .icon-container,
+        .to-do-description {
+          display: none;
+        }
+
+        .edit-container {
+          @include flex-column;
+
+          padding: 2% 0;
+
+          .priority-edit {
+            @include flex-row;
+
+            margin: 0 3%;
+            width: min-content;
+
+            .selected::after {
+              border-bottom: 1px solid $dark-white;
+            }
+
+            [class$="-priority"] {
+              margin: auto;
+              cursor: pointer;
+
+              .full-priority {
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.5s opacity ease;
+              }
+
+              &:hover {
+                .full-priority {
+                  opacity: 1;
+                  visibility: visible;
+                }
+              }
+
+              &.selected {
+                .full-priority {
+                  opacity: 1;
+                  visibility: visible;
+                }
+              }
+            }
+            .low-priority { fill: $low-priority; }
+            .medium-priority { fill: $medium-priority !important; }
+            .high-priority { fill: $high-priority; }
+            .uh-priority { fill: $ultra-high-priority; }
+          }
+
+          input {
+            background-color: inherit;
+            font-family: $text-font;
+            color: inherit;
+            margin: 3%;
+            border: none;
+            border-bottom: 1px solid $dark-white;
+
+            &.to-do-date-edit { width: min-content; }
+          }
+        }
+      }
+
       .to-do-header {
         @include flex-row;
 
@@ -75,6 +142,7 @@
           opacity: 0;
           transition: opacity 0.5s ease;
         }
+
         &:hover {
           .checked-symbol {
             visibility: visible;
@@ -108,6 +176,7 @@
             visibility: visible;
             opacity: 1;
           }
+
           &:hover {
             .checked-symbol {
               visibility: hidden;
@@ -120,6 +189,7 @@
       &.selected {
         border-radius: 15px;
         background-color: $super-light-grey;
+
         .to-do-title,
         .to-do-description,
         .to-do-date {
@@ -127,117 +197,7 @@
           white-space: normal;
         }
       }
-
-      &.edit {
-        .to-do-date,
-        .to-do-title,
-        .to-do-priority,
-        .icon-container,
-        .to-do-description {
-          display: none;
-        }
-
-        .edit-container {
-          @include flex-column;
-          
-          padding: 2% 0;
-          .priority-edit {
-            @include flex-row;
-
-            margin: 0 3%;
-            width: min-content;
-            .selected::after {
-              border-bottom: 1px solid $dark-white;
-            }
-            [class$="-priority"] {
-              margin: auto;
-              cursor: pointer;
-              .full-priority {
-                opacity: 0;
-                visibility: hidden; 
-                transition: 0.5s opacity ease;
-              }
-
-              &:hover {
-                .full-priority {
-                  opacity: 1;
-                  visibility: visible;
-                }
-              }
-
-              
-              &.selected {
-                .full-priority {
-                  opacity: 1;
-                  visibility: visible;
-                }
-              }
-
-            }
-            .low-priority { fill: $low-priority; }
-            .medium-priority { fill: $medium-priority !important; }
-            .high-priority { fill: $high-priority; }
-            .uh-priority { fill: $ultra-high-priority; }
-
-          }
-          input {
-            background-color: inherit;
-            font-family: $text-font;
-            color: inherit;
-            margin: 3%;
-            border: none;
-            border-bottom: 1px solid $dark-white;
-
-            &.to-do-date-edit { width: min-content; }
-          }
-        }
-
-      }
-      
     }
-
-/*
-
-    .to-do-item {
-    @include flex-row;
-
-    color: $light-white;
-    font-weight: 400;
-    font-family: $text-font;
-
-    p,
-    span { cursor: pointer; }
-
-    span { margin-left: 2em; }
-    }
-
-    .to-do-item-edit {
-    @include flex-row;
-
-    align-items: center;
-    width: 100%;
-
-    .edit-project {
-    background-color: $light-grey;
-    color: $light-white;
-    border: none;
-    font-size: 1em;
-    width: 50%;
-    }
-
-    input { margin-right: 2em; }
-
-    .icon { margin: 0 2em; }
-    }
-
-    .checked {
-    color: $dark-white;
-
-    p {
-    text-decoration: line-through;
-    }
-    }
-     */
   }
 
   .title {
