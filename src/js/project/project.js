@@ -22,11 +22,10 @@ class Project {
   }
 
   displayProject() {
-    console.log(this.name);
     this.display = new ProjectDisplay(this.name,
-                    this.priority,
-                    this.handleProjectEdit.bind(this),
-                    this.handleProjectDelete.bind(this));
+      this.priority,
+      this.handleProjectEdit.bind(this),
+      this.handleProjectDelete.bind(this));
   }
 
   constructor(name = 'To-do Project', priority = 'low-priority', toDos = [], index = -1) {

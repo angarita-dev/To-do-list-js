@@ -30,7 +30,7 @@ class Display {
 
         this.projectContainer.classList.remove('to-do-edit');
         handleFunction(projectName, selectedPriority);
-      }
+      };
     });
   }
 
