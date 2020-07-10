@@ -43,7 +43,7 @@ class Display {
   }
 
   loaders(handleProjectEdit, handleProjectDelete) {
-    const iconContainer = this.projectContainer.querySelector('.icon');
+    const iconContainer = this.projectContainer.querySelector('.icon-container');
 
     const iconEdit = iconContainer.querySelector('.edit-icon');
     const iconDelete = iconContainer.querySelector('.delete-icon');

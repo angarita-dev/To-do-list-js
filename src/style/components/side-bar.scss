@@ -52,20 +52,18 @@
         .delete-icon { display: block; }
       }
 
-      .icon {
+      .icon-container {
+        @include flex-row;
+
         margin: auto 0.5em;
-        display: none;
+        justify-content: space-between;
         cursor: default;
 
-        .edit-icon {
-          cursor: pointer;
+        .edit-icon, .delete-icon {
           display: block;
+          cursor: pointer;
         }
 
-        .delete-icon {
-          cursor: pointer;
-          display: none;
-        }
       }
       .edit-container { display: none; }
 
@@ -94,10 +92,6 @@
           }
         }
 
-        .icon {
-          display: block;
-          min-width: 24px;
-        }
       }
     }
   }

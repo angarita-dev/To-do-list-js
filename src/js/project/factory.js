@@ -13,10 +13,14 @@ class Factory {
           <span class='high-priority priority-selector'></span>
           <span class='uh-priority priority-selector'></span>
         </div>
-        <svg class='icon'>
-          <use class='edit-icon' xlink:href='#edit-icon' />
-          <use class='delete-icon delete-project-icon' xlink:href='#delete-icon' />
-        </svg>
+        <div class='icon-container'>
+          <svg class='icon'>
+              <use class='edit-icon' xlink:href='#edit-icon' />
+          </svg>
+          <svg class='icon'>
+              <use class='delete-icon delete-project-icon' xlink:href='#delete-icon' />
+          </svg>
+        </div>
       </li>
     `.trim();
     template.innerHTML = html;
