@@ -11,7 +11,7 @@
   .card-container {
     @include flex-column;
 
-    width: 25%;
+    width: 35%;
     margin: 2% auto;
     padding: 2% 3%;
     background-color: $light-grey;
@@ -43,44 +43,201 @@
     }
 
     .to-do-item {
-      @include flex-row;
+      @include flex-column;
 
       color: $light-white;
+      padding: 0 5%;
       font-weight: 400;
       font-family: $text-font;
 
-      p,
-      span { cursor: pointer; }
+      .edit-container {
+        display: none;
+      }
 
-      span { margin-left: 2em; }
+      .to-do-header {
+        @include flex-row;
+
+        align-items: center;
+        justify-content: space-between;
+
+        .header-left {
+          @include flex-row;
+
+          align-items: center;
+
+          .to-do-priority { margin-left: 1em; }
+        }
+      }
+
+      .checked-icon {
+        .checked-symbol {
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+        &:hover {
+          .checked-symbol {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+          }
+        }
+      }
+
+      .to-do-body {
+        .to-do-description {
+          color: $dark-white;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      &.checked {
+        .to-do-title {
+          text-decoration: line-through;
+          color: $dark-white;
+        }
+
+        .to-do-date {
+          color: $dark-white;
+        }
+
+        .checked-icon {
+          .checked-symbol {
+            visibility: visible;
+            opacity: 1;
+          }
+          &:hover {
+            .checked-symbol {
+              visibility: hidden;
+              opacity: 0;
+            }
+          }
+        }
+      }
+
+      &.selected {
+        border-radius: 15px;
+        background-color: $super-light-grey;
+        .to-do-title,
+        .to-do-description,
+        .to-do-date {
+          color: $light-white;
+          white-space: normal;
+        }
+      }
+
+      &.edit {
+        .to-do-date,
+        .to-do-title,
+        .to-do-priority,
+        .icon-container,
+        .to-do-description {
+          display: none;
+        }
+
+        .edit-container {
+          @include flex-column;
+          
+          padding: 2% 0;
+          .priority-edit {
+            @include flex-row;
+
+            margin: 0 3%;
+            width: min-content;
+            .selected::after {
+              border-bottom: 1px solid $dark-white;
+            }
+            [class$="-priority"] {
+              margin: auto;
+              cursor: pointer;
+              .full-priority {
+                opacity: 0;
+                visibility: hidden; 
+                transition: 0.5s opacity ease;
+              }
+
+              &:hover {
+                .full-priority {
+                  opacity: 1;
+                  visibility: visible;
+                }
+              }
+
+              
+              &.selected {
+                .full-priority {
+                  opacity: 1;
+                  visibility: visible;
+                }
+              }
+
+            }
+            .low-priority { fill: $low-priority; }
+            .medium-priority { fill: $medium-priority !important; }
+            .high-priority { fill: $high-priority; }
+            .uh-priority { fill: $ultra-high-priority; }
+
+          }
+          input {
+            background-color: inherit;
+            font-family: $text-font;
+            color: inherit;
+            margin: 3%;
+            border: none;
+            border-bottom: 1px solid $dark-white;
+
+            &.to-do-date-edit { width: min-content; }
+          }
+        }
+
+      }
+      
+    }
+
+/*
+
+    .to-do-item {
+    @include flex-row;
+
+    color: $light-white;
+    font-weight: 400;
+    font-family: $text-font;
+
+    p,
+    span { cursor: pointer; }
+
+    span { margin-left: 2em; }
     }
 
     .to-do-item-edit {
-      @include flex-row;
+    @include flex-row;
 
-      align-items: center;
-      width: 100%;
+    align-items: center;
+    width: 100%;
 
-      .edit-project {
-        background-color: $light-grey;
-        color: $light-white;
-        border: none;
-        font-size: 1em;
-        width: 50%;
-      }
+    .edit-project {
+    background-color: $light-grey;
+    color: $light-white;
+    border: none;
+    font-size: 1em;
+    width: 50%;
+    }
 
-      input { margin-right: 2em; }
+    input { margin-right: 2em; }
 
-      .icon { margin: 0 2em; }
+    .icon { margin: 0 2em; }
     }
 
     .checked {
-      color: $dark-white;
+    color: $dark-white;
 
-      p {
-        text-decoration: line-through;
-      }
+    p {
+    text-decoration: line-through;
     }
+    }
+     */
   }
 
   .title {
