@@ -2,6 +2,13 @@ import ProjectStorage from './storage';
 import ProjectDisplay from './display';
 
 class Project {
+  constructor(name = 'To-do Project', priority = 'low-priority', toDos = [], index = -1) {
+    this.name = name;
+    this.priority = priority;
+    this.toDos = toDos;
+    this.index = index;
+  }
+
   handleProjectEdit() {
     const exitEdit = (name, priority) => {
       this.name = name;
@@ -28,12 +35,6 @@ class Project {
       this.handleProjectDelete.bind(this));
   }
 
-  constructor(name = 'To-do Project', priority = 'low-priority', toDos = [], index = -1) {
-    this.name = name;
-    this.priority = priority;
-    this.toDos = toDos;
-    this.index = index;
-  }
 }
 
 export default Project;
