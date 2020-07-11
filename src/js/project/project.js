@@ -34,7 +34,6 @@ class Project {
       this.handleProjectEdit.bind(this),
       this.handleProjectDelete.bind(this));
   }
-
 }
 
 export default Project;
