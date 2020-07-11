@@ -2,7 +2,8 @@ import Factory from './factory';
 
 class Display {
   static removeSelected() {
-    const projectsSelected = Array.from(document.getElementsByClassName('selected'));
+    const projects = Array.from(document.getElementsByClassName('to-do-project'));
+    const projectsSelected = projects.filter( project => project.classList.contains('selected'));
 
     projectsSelected.forEach(project => project.classList.remove('selected'));
   }
