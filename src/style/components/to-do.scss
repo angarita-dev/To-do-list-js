@@ -127,6 +127,13 @@
         align-items: center;
         justify-content: space-between;
 
+        .to-do-date,
+        .to-do-priority,
+        .icon-container {
+          min-width: fit-content;
+          margin-left: 1em;
+        }
+
         .header-left {
           @include flex-row;
 
