@@ -1,12 +1,13 @@
 import ProjectStorage from './storage';
 import ProjectDisplay from './display';
+import ToDoManager from './to-do-manager';
 
 class Project {
   constructor(name = 'To-do Project', priority = 'low-priority', toDos = [], index = -1) {
     this.name = name;
     this.priority = priority;
-    this.toDos = toDos;
     this.index = index;
+    this.toDoManager = new ToDoManager(index, toDos);
   }
 
   handleProjectEdit() {

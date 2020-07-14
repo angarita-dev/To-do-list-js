@@ -15,11 +15,13 @@ class ToDo {
 
   constructor(projectIndex,
     toDoIndex,
+    reDisplay,
     name = 'To-do',
     description = 'To-do description',
     priority = 'low-priority',
     dueDate = new Date(),
     checked = false) {
+    console.log(name);
     this.name = name;
     this.description = description;
     this.priority = priority;
@@ -27,6 +29,7 @@ class ToDo {
     this.toDoIndex = toDoIndex;
     this.projectIndex = projectIndex;
     this.checked = checked;
+    this.reDisplay = reDisplay;
   }
 
   saveToDo() {
@@ -39,6 +42,7 @@ class ToDo {
       this.toDoIndex);
   }
 
+
   handleToDoEdit() {
     const exitEdit = (name, description, priority, dueDate) => {
       this.name = name;
@@ -48,13 +52,14 @@ class ToDo {
 
       this.display.reDisplayValues(name, description, priority, dueDate);
       this.saveToDo();
+      this.reDisplay();
     };
 
     return exitEdit;
   }
 
   handleToDoDelete() {
-    this.display.removeToDo();
+    this.display.removeElement();
     ToDoStorage.removeToDo(this.projectIndex, this.toDoIndex);
   }
 
@@ -64,7 +69,14 @@ class ToDo {
     ToDoStorage.saveChecked(this.projectIndex,
       this.toDoIndex,
       this.checked);
+    this.reDisplay();
   }
+
+  selectAndEdit() {
+    this.display.selectToDo();
+    this.display.editToDo(this.handleToDoEdit.bind(this));
+  }
+
 }
 
 export default ToDo;
