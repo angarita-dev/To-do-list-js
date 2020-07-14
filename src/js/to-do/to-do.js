@@ -21,7 +21,6 @@ class ToDo {
     priority = 'low-priority',
     dueDate = new Date(),
     checked = false) {
-    console.log(name);
     this.name = name;
     this.description = description;
     this.priority = priority;
@@ -41,7 +40,6 @@ class ToDo {
       this.projectIndex,
       this.toDoIndex);
   }
-
 
   handleToDoEdit() {
     const exitEdit = (name, description, priority, dueDate) => {
@@ -74,9 +72,8 @@ class ToDo {
 
   selectAndEdit() {
     this.display.selectToDo();
-    this.display.editToDo(this.handleToDoEdit.bind(this));
+    this.display.editToDo(this.handleToDoEdit());
   }
-
 }
 
 export default ToDo;

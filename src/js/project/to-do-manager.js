@@ -66,6 +66,7 @@ class ToDoManager {
     });
     this.toDoList = toDoList;
     this.toDoIndex = toDoList.length - 1;
+    this.sortToDos();
     this.displayToDos();
     this.loadNewToDo(); 
   }
