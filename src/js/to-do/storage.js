@@ -13,7 +13,6 @@ class Storage {
       dueDate,
       checked,
     };
-
     projects[projectIndex].toDo[toDoIndex] = newToDo;
     localStorage.setItem('projects', JSON.stringify(projects));
   }
