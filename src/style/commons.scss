@@ -55,3 +55,43 @@ body {
 
   color: $low-priority;
 }
+
+.priority-edit {
+  @include flex-row;
+
+  margin: 0 3%;
+  width: min-content;
+
+  .selected::after {
+    border-bottom: 1px solid $dark-white;
+  }
+
+  [class$="-priority"] {
+    margin: auto;
+    cursor: pointer;
+
+    .full-priority {
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.5s opacity ease;
+    }
+
+    &:hover {
+      .full-priority {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &.selected {
+      .full-priority {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+  .low-priority { fill: $low-priority; }
+  .medium-priority { fill: $medium-priority !important; }
+  .high-priority { fill: $high-priority; }
+  .uh-priority { fill: $ultra-high-priority; }
+}
