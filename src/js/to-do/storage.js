@@ -11,6 +11,7 @@ class Storage {
       name,
       description,
       dueDate,
+      priority,
       checked,
     };
     projects[projectIndex].toDo[toDoIndex] = newToDo;

@@ -13,13 +13,13 @@ class ToDo {
       this.handleCheckedToggle.bind(this));
   }
 
-  constructor(name = 'To-do',
+  constructor(projectIndex,
+    toDoIndex,
+    name = 'To-do',
     description = 'To-do description',
     priority = 'low-priority',
     dueDate = new Date(),
-    toDoIndex,
-    projectIndex,
-    checked) {
+    checked = false) {
     this.name = name;
     this.description = description;
     this.priority = priority;
@@ -27,6 +27,16 @@ class ToDo {
     this.toDoIndex = toDoIndex;
     this.projectIndex = projectIndex;
     this.checked = checked;
+  }
+
+  saveToDo() {
+    ToDoStorage.saveToDo(this.name,
+      this.description,
+      this.priority,
+      this.dueDate,
+      this.checked,
+      this.projectIndex,
+      this.toDoIndex);
   }
 
   handleToDoEdit() {
@@ -37,13 +47,7 @@ class ToDo {
       this.dueDate = new Date(dueDate);
 
       this.display.reDisplayValues(name, description, priority, dueDate);
-      ToDoStorage.saveToDo(name,
-        description,
-        priority,
-        this.dueDate,
-        this.checked,
-        this.projectIndex,
-        this.toDoIndex);
+      this.saveToDo();
     };
 
     return exitEdit;
@@ -61,7 +65,6 @@ class ToDo {
       this.toDoIndex,
       this.checked);
   }
-
 }
 
 export default ToDo;
