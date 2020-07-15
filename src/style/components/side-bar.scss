@@ -52,21 +52,20 @@
         .delete-icon { display: block; }
       }
 
-      .icon {
+      .icon-container {
+        @include flex-row;
+
         margin: auto 0.5em;
-        display: none;
+        justify-content: space-between;
         cursor: default;
 
-        .edit-icon {
-          cursor: pointer;
-          display: block;
-        }
-
+        .edit-icon,
         .delete-icon {
+          display: block;
           cursor: pointer;
-          display: none;
         }
       }
+      .save-icon { display: none; }
       .edit-container { display: none; }
 
       &.selected {
@@ -76,6 +75,7 @@
           .text-container { display: none !important; }
           .edit-icon { display: none !important; }
           .delete-icon { display: block !important; }
+          .save-icon { display: block !important; }
 
           .edit-container {
             @include flex-row;
@@ -92,11 +92,6 @@
               width: 50%;
             }
           }
-        }
-
-        .icon {
-          display: block;
-          min-width: 24px;
         }
       }
     }
