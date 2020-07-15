@@ -7,7 +7,7 @@ class Factory {
           <h4 class='text'>${title}</h4>
         </div>
         <div class='edit-container'>
-          <input class='text edit-project'/>
+          <input class='text edit-project' value="${title}"/>
           <div class="priority-edit">
             <svg class="icon priority-icon low-priority">
               <use xlink:href="#empty-priority"/>

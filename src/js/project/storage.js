@@ -1,17 +1,20 @@
 class ProjectStorage {
-  static saveProject(title, priority, index = -1) {
+  static saveAllProjects(projectList) {
+    localStorage.setItem('projects',JSON.stringify(projectList));
+  }
+
+  static saveProject(title, priority, index) {
     const oldProjects = localStorage.getItem('projects');
     let newProjects;
 
     if (oldProjects === null) {
       newProjects = [{ title, priority, toDo: [] }];
-    } else if (index === -1) {
-      // Should append project
-      newProjects = [JSON.parse(oldProjects), { title, priority, toDo: [] }].flat();
     } else {
       newProjects = JSON.parse(oldProjects);
-      newProjects[index].title = title;
-      newProjects[index].priority = priority;
+      const toDo = newProjects[index] === undefined ?
+        [] :
+        newProjects[index].toDo;
+      newProjects[index] = { title, priority, toDo };
     }
 
     localStorage.setItem('projects', JSON.stringify(newProjects));

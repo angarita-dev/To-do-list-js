@@ -22,6 +22,11 @@ class ToDoManager {
     this.toDoList.sort(sortToDo);
   }
 
+  reIndex(projectIndex) {
+    this.projectIndex = projectIndex;
+    this.toDoList.forEach(toDo => toDo.projectIndex = projectIndex);
+  }
+
   saveToDos() {
     this.toDoList.forEach(toDo => toDo.saveToDo());
   }
@@ -67,8 +72,19 @@ class ToDoManager {
     this.toDoList = toDoList;
     this.toDoIndex = toDoList.length - 1;
     this.sortToDos();
-    this.displayToDos();
     this.loadNewToDo(); 
+  }
+
+  getToDos() {
+    return this.toDoList.map((toDoElement) => {
+      return {
+        name: toDoElement.name,
+        description: toDoElement.description,
+        priority: toDoElement.priority,
+        dueDate: toDoElement.dueDate,
+        checked: toDoElement.checked,
+      }
+    });
   }
 }
 

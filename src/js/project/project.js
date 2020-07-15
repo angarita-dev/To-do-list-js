@@ -3,11 +3,36 @@ import ProjectDisplay from './display';
 import ToDoManager from './to-do-manager';
 
 class Project {
-  constructor(name = 'To-do Project', priority = 'low-priority', toDos = [], index = -1) {
+  constructor(reDisplay,
+    deleteHandler,
+    index,
+    name = 'To-do Project',
+    priority = 'low-priority',
+    toDos = []) {
     this.name = name;
     this.priority = priority;
     this.index = index;
+    this.deleteHandler = deleteHandler;
+    this.reDisplay = reDisplay;
     this.toDoManager = new ToDoManager(index, toDos);
+  }
+
+  displayToDos() {
+    this.toDoManager.displayToDos();
+    this.toDoManager.loadNewToDo();
+  }
+
+  selectProject() {
+    this.display.selectProject();
+  }
+  
+  saveProject() {
+    ProjectStorage.saveProject(this.name, this.priority, this.index);
+  }
+
+  selectAndEdit() {
+    this.display.selectProject();
+    this.display.editProject(this.handleProjectEdit());
   }
 
   handleProjectEdit() {
@@ -17,16 +42,16 @@ class Project {
 
       this.display.changeTitle(this.name);
       this.display.changePriority(this.priority);
-      ProjectStorage.saveProject(this.name, this.priority, this.index);
+      this.saveProject();
+      this.reDisplay();
     };
 
-    this.display.editProject(exitEdit);
+    return exitEdit;
   }
 
   handleProjectDelete() {
     this.display.removeElement();
-
-    ProjectStorage.deleteProject(this.index);
+    this.deleteHandler(this.index);
   }
 
   displayProject() {
@@ -34,6 +59,11 @@ class Project {
       this.priority,
       this.handleProjectEdit.bind(this),
       this.handleProjectDelete.bind(this));
+  }
+
+  setIndex(newIndex) {
+    this.index = newIndex;
+    this.toDoManager.reIndex(newIndex);
   }
 }
 
