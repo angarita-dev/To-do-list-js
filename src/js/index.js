@@ -19,13 +19,13 @@ class ProjectManager {
   }
 
   reIndexProjects() {
-    this.projects.forEach((project, index) => { project.setIndex(index) });
+    this.projects.forEach((project, index) => { project.setIndex(index); });
   }
 
   addProject() {
     const newProject = new Project(this.reDisplayProject.bind(this),
       this.deleteProjectHandler.bind(this),
-      0); 
+      0);
     this.projects.unshift(newProject);
     this.reIndexProjects();
     this.saveProjects();
@@ -39,11 +39,11 @@ class ProjectManager {
   }
 
   saveProjects() {
-    const projects = this.projects.map(project => { 
-      const name = project.name;
-      const priority = project.priority;
+    const projects = this.projects.map(project => {
+      const { name } = project;
+      const { priority } = project;
       const toDo = project.toDoManager.getToDos();
-      return { name, priority, toDo }
+      return { name, priority, toDo };
     });
     ProjectStorage.saveAllProjects(projects);
   }
@@ -54,7 +54,7 @@ class ProjectManager {
     GeneralDisplay.displayNewTitle(newTitle, newTitlePriority);
 
     this.toDoManager = project.toDoManager;
-    project.selectProject();   
+    project.selectProject();
     this.displayToDos();
   }
 
@@ -73,8 +73,8 @@ class ProjectManager {
       projectHTML.onclick = (event) => {
         const onEdit = projectHTML.classList.contains('to-do-edit');
         const onDeath = event.target.classList.contains('delete-icon');
-        if(onEdit || onDeath) return;
-        this.selectProject(project)
+        if (onEdit || onDeath) return;
+        this.selectProject(project);
       };
     });
   }
@@ -87,7 +87,7 @@ class ProjectManager {
   }
 
   selectFirstProject() {
-    if(this.projects.length === 0) {
+    if (this.projects.length === 0) {
       GeneralDisplay.clearProjectList();
       GeneralDisplay.disableToDoCreation();
       GeneralDisplay.displayNewTitle('To-do app', 'medium-priority');
@@ -105,14 +105,16 @@ class ProjectManager {
   }
 
   constructor() {
-    const projects = ProjectStorage.readProjects().map( (project, index) => {
-      return new Project(this.reDisplayProject.bind(this),
+    const projectsData = ProjectStorage.readProjects();
+    const projects = projectsData.map((project, index) => {
+      const projectInstance = new Project(this.reDisplayProject.bind(this),
         this.deleteProjectHandler.bind(this),
         index,
         project.name,
         project.priority,
         project.toDo);
-    });    
+      return projectInstance;
+    });
     this.projects = projects;
   }
 

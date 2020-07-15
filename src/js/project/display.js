@@ -3,7 +3,7 @@ import Factory from './factory';
 class Display {
   static removeSelected() {
     const projects = Array.from(document.getElementsByClassName('to-do-project'));
-    const projectsSelected = projects.filter( project => project.classList.contains('selected'));
+    const projectsSelected = projects.filter(project => project.classList.contains('selected'));
 
     projectsSelected.forEach(project => project.classList.remove('selected'));
   }
@@ -11,19 +11,19 @@ class Display {
   togglePriority() {
     const priorityContainer = this.projectContainer.querySelector('.priority-edit');
     const priorityItems = Array.from(priorityContainer.children);
-      
-    priorityItems.forEach( priorityInput => {
+
+    priorityItems.forEach(priorityInput => {
       priorityInput.onclick = () => {
         this.removeSelectedPriorityInput();
         priorityInput.classList.add('selected');
-      }
+      };
     });
   }
 
   removeSelectedPriorityInput() {
     const priorityContainer = this.projectContainer.querySelector('.priority-edit');
     const priorityItems = Array.from(priorityContainer.children);
-    priorityItems.forEach( priorityItem => {
+    priorityItems.forEach(priorityItem => {
       priorityItem.classList.remove('selected');
     });
   }
@@ -39,7 +39,7 @@ class Display {
     priorityInputs.forEach(inputElement => {
       const reducer = (accumulator, current) => accumulator || current.includes(selectedPriority);
       const selectedClass = Array.from(inputElement.classList).reduce(reducer, false);
-      if(selectedClass) {
+      if (selectedClass) {
         inputElement.classList.add('selected');
       }
     });
@@ -47,7 +47,7 @@ class Display {
 
   static removeEdit() {
     const projects = Array.from(document.getElementsByClassName('to-do-project'));
-    const projectsSelected = projects.filter( project => project.classList.contains('to-do-edit'));
+    const projectsSelected = projects.filter(project => project.classList.contains('to-do-edit'));
 
     projectsSelected.forEach(project => project.classList.remove('to-do-edit'));
   }
@@ -67,9 +67,7 @@ class Display {
     const editContainer = this.projectContainer.querySelector('.edit-container');
     const selectedName = editContainer.querySelector('.edit-project').value;
     const priorityInput = editContainer.querySelector('.selected');
-    const selectedPriority = Array.from(priorityInput.classList).filter( className => {
-      return className.includes('-priority')
-    })[0];
+    const selectedPriority = Array.from(priorityInput.classList).filter(className => className.includes('-priority'))[0];
     this.projectContainer.classList.remove('to-do-edit');
 
     saveHandler(selectedName, selectedPriority);
@@ -81,8 +79,8 @@ class Display {
 
     this.togglePriority();
 
-    const saveIcon = this.projectContainer.querySelector('.save-icon'); 
-    saveIcon.onclick = () => this.exitEdit(exitEditHandler); 
+    const saveIcon = this.projectContainer.querySelector('.save-icon');
+    saveIcon.onclick = () => this.exitEdit(exitEditHandler);
   }
 
   static displayProject(title, priority) {

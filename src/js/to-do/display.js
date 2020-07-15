@@ -6,14 +6,14 @@ class Display {
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    return month < 10 ?
-      `${day}-0${month}-${year}` :
-      `${day}-${month}-${year}`;
+    return month < 10
+      ? `${day}-0${month}-${year}`
+      : `${day}-${month}-${year}`;
   }
 
   static removeSelected() {
     const projects = Array.from(document.getElementsByClassName('to-do-item'));
-    const projectsSelected = projects.filter( project => project.classList.contains('selected'));
+    const projectsSelected = projects.filter(project => project.classList.contains('selected'));
 
     projectsSelected.forEach(project => project.classList.remove('selected'));
   }
@@ -26,7 +26,7 @@ class Display {
 
   static removeEdit() {
     const toDos = Array.from(document.getElementsByClassName('to-do-item'));
-    const toDosEdit = toDos.filter( toDo => toDo.classList.contains('edit'));
+    const toDosEdit = toDos.filter(toDo => toDo.classList.contains('edit'));
 
     toDosEdit.forEach(toDo => toDo.classList.remove('edit'));
   }
@@ -34,7 +34,7 @@ class Display {
   removeSelectedPriorityInput() {
     const priorityContainer = this.toDoContainer.querySelector('.priority-edit');
     const priorityItems = Array.from(priorityContainer.children);
-    priorityItems.forEach( priorityItem => {
+    priorityItems.forEach(priorityItem => {
       priorityItem.classList.remove('selected');
     });
   }
@@ -42,12 +42,12 @@ class Display {
   togglePriority() {
     const priorityContainer = this.toDoContainer.querySelector('.priority-edit');
     const priorityItems = Array.from(priorityContainer.children);
-      
-    priorityItems.forEach( priorityInput => {
+
+    priorityItems.forEach(priorityInput => {
       priorityInput.onclick = () => {
         this.removeSelectedPriorityInput();
         priorityInput.classList.add('selected');
-      }
+      };
     });
   }
 
@@ -56,13 +56,13 @@ class Display {
     const priorityInputs = Array.from(editPriorityContainer.children);
     const currentPriorityContainer = this.toDoContainer.querySelector('.to-do-priority');
     const selectedPriority = Array.from(currentPriorityContainer.classList)
-      .filter(className => className != 'to-do-priority' && className.includes('-priority'))[0];
+      .filter(className => className !== 'to-do-priority' && className.includes('-priority'))[0];
 
     this.removeSelectedPriorityInput();
     priorityInputs.forEach(inputElement => {
       const reducer = (accumulator, current) => accumulator || current.includes(selectedPriority);
       const selectedClass = Array.from(inputElement.classList).reduce(reducer, false);
-      if(selectedClass) {
+      if (selectedClass) {
         inputElement.classList.add('selected');
       }
     });
@@ -74,9 +74,7 @@ class Display {
     const dateValue = editContainer.querySelector('.to-do-date-edit').valueAsDate;
     const descriptionValue = editContainer.querySelector('.to-do-description-edit').value;
     const priorityInput = editContainer.querySelector('.selected');
-    const selectedPriority = Array.from(priorityInput.classList).filter( className => {
-      return className.includes('-priority')
-    })[0];
+    const selectedPriority = Array.from(priorityInput.classList).filter(className => className.includes('-priority'))[0];
     this.toDoContainer.classList.remove('edit');
     saveHandler(titleValue,
       descriptionValue,
@@ -92,7 +90,7 @@ class Display {
     this.toDoContainer.classList.add('edit');
 
     const saveIcon = this.toDoContainer.querySelector('.save-icon');
-    saveIcon.onclick = () => { this.exitEdit(exitEditHandler) };
+    saveIcon.onclick = () => { this.exitEdit(exitEditHandler); };
   }
 
   static displayToDo(name, description, priority, dueDate, checked) {
@@ -109,15 +107,15 @@ class Display {
 
   loaders(handleEdit, handleDelete, handleCheck) {
     const iconContainer = this.toDoContainer.querySelector('.icon-container');
-    const editIcon = iconContainer.querySelector('.edit-icon'); 
+    const editIcon = iconContainer.querySelector('.edit-icon');
     const deleteIcon = iconContainer.querySelector('.delete-icon');
     const checkIcon = iconContainer.querySelector('.checked-icon');
 
-    this.toDoContainer.onclick = (event) => { 
-      const tagName = event.target.tagName;
-      if(tagName === 'svg' || tagName === 'use') return;
-      this.selectToDo()
-    }; 
+    this.toDoContainer.onclick = (event) => {
+      const { tagName } = event.target;
+      if (tagName === 'svg' || tagName === 'use') return;
+      this.selectToDo();
+    };
 
     editIcon.onclick = () => {
       const exitEditHandler = handleEdit();
@@ -127,12 +125,12 @@ class Display {
     deleteIcon.onclick = () => {
       handleDelete();
       this.toDoContainer.remove();
-    }
+    };
 
     checkIcon.onclick = () => {
       handleCheck();
       this.toggleCheck();
-    }
+    };
   }
 
   constructor(name,
@@ -150,7 +148,7 @@ class Display {
 
   reDisplayValues(name, description, priority, dueDate) {
     const toDoHeader = this.toDoContainer.querySelector('.to-do-header');
-    const nameContainer = toDoHeader.querySelector('.to-do-title'); 
+    const nameContainer = toDoHeader.querySelector('.to-do-title');
     const dateContainer = toDoHeader.querySelector('.to-do-date');
     const descriptionContainer = this.toDoContainer.querySelector('.to-do-description');
     const priorityContainer = toDoHeader.querySelector('.to-do-priority');
@@ -170,7 +168,7 @@ class Display {
     const descriptionInput = editContainer.querySelector('.to-do-description-edit');
 
     titleInput.value = name;
-    dateInput.value = new Date(dueDate).toISOString().substring(0,10);
+    dateInput.value = new Date(dueDate).toISOString().substring(0, 10);
     descriptionInput.value = description;
     this.selectPriorityInput();
   }

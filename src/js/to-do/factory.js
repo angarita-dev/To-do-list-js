@@ -1,7 +1,7 @@
 class Factory {
   static toDo(name, description, priority, dueDate, checked, rawDate) {
-    const inputDate = rawDate.toISOString().substring(0,10);
-    const template = document.createElement('template'); 
+    const inputDate = rawDate.toISOString().substring(0, 10);
+    const template = document.createElement('template');
     const checkedValue = checked ? 'checked' : '';
     const html = `
       <li class="to-do-item ${checkedValue}">

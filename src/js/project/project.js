@@ -25,7 +25,7 @@ class Project {
   selectProject() {
     this.display.selectProject();
   }
-  
+
   saveProject() {
     ProjectStorage.saveProject(this.name, this.priority, this.index);
   }

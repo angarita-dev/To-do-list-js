@@ -5,7 +5,7 @@ class GeneralDisplay {
     const toDoListContainer = document.getElementById('to-do-container');
     toDoListContainer.innerHTML = '';
   }
-  
+
   static clearProjectList() {
     const projectList = document.getElementById('projects-container');
     projectList.innerHTML = '';
@@ -13,11 +13,11 @@ class GeneralDisplay {
 
   static loadNewProject(handlerFunction) {
     const projectAddIcon = document.getElementById('add-project-icon');
-    projectAddIcon.onclick = () => { handlerFunction() };
+    projectAddIcon.onclick = () => { handlerFunction(); };
   }
 
   static displayNewTitle(title, priority) {
-    const currentTitle = document.getElementById("project-title");
+    const currentTitle = document.getElementById('project-title');
     const currentTitlePriority = Array.from(currentTitle.classList)
       .filter(className => className.includes('-priority'))[0];
 

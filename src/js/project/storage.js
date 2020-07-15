@@ -1,6 +1,6 @@
 class ProjectStorage {
   static saveAllProjects(projectList) {
-    localStorage.setItem('projects',JSON.stringify(projectList));
+    localStorage.setItem('projects', JSON.stringify(projectList));
   }
 
   static saveProject(title, priority, index) {
@@ -11,9 +11,9 @@ class ProjectStorage {
       newProjects = [{ title, priority, toDo: [] }];
     } else {
       newProjects = JSON.parse(oldProjects);
-      const toDo = newProjects[index] === undefined ?
-        [] :
-        newProjects[index].toDo;
+      const toDo = newProjects[index] === undefined
+        ? []
+        : newProjects[index].toDo;
       newProjects[index] = { title, priority, toDo };
     }
 

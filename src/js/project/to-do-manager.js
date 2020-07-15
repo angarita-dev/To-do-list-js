@@ -2,7 +2,6 @@ import ToDo from '../to-do/to-do';
 
 class ToDoManager {
   sortToDos() {
-    const toDoContainers = Array.from(document.getElementById('to-do-container').children);
     const modelPriority = ['uh-priority', 'high-priority', 'medium-priority', 'low-priority'];
 
     const getPriorityIndex = (priority) => modelPriority.indexOf(priority);
@@ -24,7 +23,7 @@ class ToDoManager {
 
   reIndex(projectIndex) {
     this.projectIndex = projectIndex;
-    this.toDoList.forEach(toDo => toDo.projectIndex = projectIndex);
+    this.toDoList.forEach(toDo => { toDo.projectIndex = projectIndex; });
   }
 
   saveToDos() {
@@ -32,7 +31,7 @@ class ToDoManager {
   }
 
   displayToDos() {
-    const toDoContainer = document.getElementById("to-do-container");
+    const toDoContainer = document.getElementById('to-do-container');
     toDoContainer.innerHTML = '';
     this.saveToDos();
     this.toDoList.forEach(toDo => toDo.displayToDo());
@@ -45,7 +44,7 @@ class ToDoManager {
 
   addToDo() {
     this.toDoIndex += 1;
-    const newToDo = new ToDo(this.projectIndex, this.toDoIndex, this.reDisplayToDos.bind(this)); 
+    const newToDo = new ToDo(this.projectIndex, this.toDoIndex, this.reDisplayToDos.bind(this));
     this.toDoList.unshift(newToDo);
     this.displayToDos();
     newToDo.selectAndEdit();
@@ -59,32 +58,28 @@ class ToDoManager {
 
   constructor(projectIndex, toDoListData) {
     this.projectIndex = projectIndex;
-    const toDoList = toDoListData.map((data, index) => {
-      return new ToDo(this.projectIndex,
-        index,
-        this.reDisplayToDos.bind(this),
-        data.name,
-        data.description,
-        data.priority,
-        data.dueDate,
-        data.checked)
-    });
+    const toDoList = toDoListData.map((data, index) => new ToDo(this.projectIndex,
+      index,
+      this.reDisplayToDos.bind(this),
+      data.name,
+      data.description,
+      data.priority,
+      data.dueDate,
+      data.checked));
     this.toDoList = toDoList;
     this.toDoIndex = toDoList.length - 1;
     this.sortToDos();
-    this.loadNewToDo(); 
+    this.loadNewToDo();
   }
 
   getToDos() {
-    return this.toDoList.map((toDoElement) => {
-      return {
-        name: toDoElement.name,
-        description: toDoElement.description,
-        priority: toDoElement.priority,
-        dueDate: toDoElement.dueDate,
-        checked: toDoElement.checked,
-      }
-    });
+    return this.toDoList.map((toDoElement) => ({
+      name: toDoElement.name,
+      description: toDoElement.description,
+      priority: toDoElement.priority,
+      dueDate: toDoElement.dueDate,
+      checked: toDoElement.checked,
+    }));
   }
 }
 
