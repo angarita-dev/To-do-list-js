@@ -68,9 +68,24 @@ class Display {
     });
   }
 
+  exitEdit(saveHandler) {
+    const editContainer = this.toDoContainer.querySelector('.edit-container');
+    const titleValue = editContainer.querySelector('.to-do-title-edit').value;
+    const dateValue = editContainer.querySelector('.to-do-date-edit').valueAsDate;
+    const descriptionValue = editContainer.querySelector('.to-do-description-edit').value;
+    const priorityInput = editContainer.querySelector('.selected');
+    const selectedPriority = Array.from(priorityInput.classList).filter( className => {
+      return className.includes('-priority')
+    })[0];
+    this.toDoContainer.classList.remove('edit');
+    saveHandler(titleValue,
+      descriptionValue,
+      selectedPriority,
+      dateValue);
+  }
+
   editToDo(exitEditHandler) {
     Display.removeEdit();
-    Display.removeSelected();
 
     this.selectToDo();
     this.togglePriority();
@@ -90,22 +105,6 @@ class Display {
 
   toggleCheck() {
     this.toDoContainer.classList.toggle('checked');
-  }
-
-  exitEdit(saveHandler) {
-    const editContainer = this.toDoContainer.querySelector('.edit-container');
-    const titleValue = editContainer.querySelector('.to-do-title-edit').value;
-    const dateValue = editContainer.querySelector('.to-do-date-edit').valueAsDate;
-    const descriptionValue = editContainer.querySelector('.to-do-description-edit').value;
-    const priorityInput = editContainer.querySelector('.selected');
-    const selectedPriority = Array.from(priorityInput.classList).filter( className => {
-      return className.includes('-priority')
-    })[0];
-    this.toDoContainer.classList.remove('edit');
-    saveHandler(titleValue,
-      descriptionValue,
-      selectedPriority,
-      dateValue);
   }
 
   loaders(handleEdit, handleDelete, handleCheck) {
