@@ -46,7 +46,7 @@ class ToDo {
       this.name = name;
       this.description = description;
       this.priority = priority;
-      this.dueDate = new Date(dueDate);
+      this.dueDate = dueDate;
 
       this.display.reDisplayValues(name, description, priority, dueDate);
       this.saveToDo();

@@ -2,9 +2,9 @@ import Factory from './factory';
 
 class Display {
   static parseDate(date) {
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+    const day = date.getUTCDate();
+    const month = date.getUTCMonth() + 1;
+    const year = date.getUTCFullYear();
 
     return month < 10
       ? `${day}-0${month}-${year}`
