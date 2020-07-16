@@ -7,6 +7,8 @@ Objectives of the project:
 * Module pattern.
 * Implementing OOP concepts.
 
+### [Live version](https://rawcdn.githack.com/codingAngarita/To-do-list-js/feature/added-game-logic/dist/index.html)
+
 ## Technologies used
 
 * Webpack

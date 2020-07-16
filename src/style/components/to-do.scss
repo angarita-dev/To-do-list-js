@@ -1,0 +1,177 @@
+@import '../shared/variables';
+@import '../shared/mixins';
+
+.container {
+  @include flex-column;
+
+  width: 100%;
+  padding: 1%;
+  overflow-y: auto;
+
+  .card-container {
+    @include flex-column;
+
+    width: 35%;
+    margin: 2% auto;
+    padding: 2% 3%;
+    background-color: $light-grey;
+    border-radius: 10px;
+
+    .add-container {
+      align-self: center;
+    }
+  }
+
+  .to-do-container {
+    @include flex-column;
+
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+
+    .empty-to-do {
+      @include flex-row;
+
+      justify-content: center;
+      align-items: center;
+      color: $light-white;
+      font-weight: 400;
+      font-family: $text-font;
+
+      p { margin: 0 1em; }
+    }
+
+    .to-do-item {
+      @include flex-column;
+
+      color: $light-white;
+      padding: 0 5%;
+      font-weight: 400;
+      font-family: $text-font;
+
+      .edit-container {
+        display: none;
+      }
+
+      &.edit {
+        .to-do-date,
+        .to-do-title,
+        .to-do-priority,
+        .icon-container,
+        .to-do-description {
+          display: none;
+        }
+
+        .edit-container {
+          @include flex-column;
+
+          padding: 2% 0;
+
+          input {
+            background-color: inherit;
+            font-family: $text-font;
+            color: inherit;
+            margin: 3%;
+            border: none;
+            border-bottom: 1px solid $dark-white;
+
+            &.to-do-date-edit { width: min-content; }
+          }
+        }
+      }
+
+      .to-do-header {
+        @include flex-row;
+
+        align-items: center;
+        justify-content: space-between;
+
+        .to-do-date,
+        .to-do-priority,
+        .icon-container {
+          min-width: fit-content;
+          margin-left: 1em;
+        }
+
+        .header-left {
+          @include flex-row;
+
+          align-items: center;
+
+          .to-do-priority { margin-left: 1em; }
+        }
+      }
+
+      .checked-icon {
+        .checked-symbol {
+          visibility: hidden;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+
+        &:hover {
+          .checked-symbol {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+          }
+        }
+      }
+
+      .to-do-body {
+        .to-do-description {
+          color: $dark-white;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      &.checked {
+        .to-do-title {
+          text-decoration: line-through;
+          color: $dark-white;
+        }
+
+        .to-do-date {
+          color: $dark-white;
+        }
+
+        .checked-icon {
+          .checked-symbol {
+            visibility: visible;
+            opacity: 1;
+          }
+
+          &:hover {
+            .checked-symbol {
+              visibility: hidden;
+              opacity: 0;
+            }
+          }
+        }
+      }
+
+      &.selected {
+        border-radius: 15px;
+        background-color: $super-light-grey;
+
+        .to-do-title,
+        .to-do-description,
+        .to-do-date {
+          color: $light-white;
+          white-space: normal;
+        }
+      }
+    }
+  }
+
+  .title {
+    text-decoration: underline;
+  }
+  .title-low-priority { text-decoration-color: $low-priority; }
+  .title-medium-priority { text-decoration-color: $medium-priority; }
+  .title-high-priority { text-decoration-color: $high-priority; }
+  .title-uh-priority { text-decoration-color: $ultra-high-priority; }
+}

@@ -1,0 +1,15 @@
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin priority-dot {
+  content: "\2022";
+  margin: auto 5%;
+  font-size: 2.5em;
+}
