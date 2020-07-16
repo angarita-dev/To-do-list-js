@@ -7,5 +7,13 @@ Objectives of the project:
 * Module pattern.
 * Implementing OOP concepts.
 
-## Why am I working alone
-I'm resuming microverse after a personal leave, I'm authorized to work alone since there were no coding partners available
+### [Live version](https://rawcdn.githack.com/codingAngarita/To-do-list-js/feature/added-game-logic/dist/index.html)
+
+## Technologies used
+
+* Webpack
+* Sass
+* Eslint
+* Stylelint
+* ES6
+* HTML5
